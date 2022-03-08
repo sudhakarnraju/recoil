@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React from "react";
+import LoginView from "./views/loginView";
+import { Routes, Route } from "react-router-dom";
+import { RecoilRoot, useRecoilValue } from "recoil";
 
-function App() {
+import authContextState from "./state/authContextState";
+/**
+ * Main React App.
+ * Leave App with Recoil
+ */
+
+export default function App() {
+  const authContext = useRecoilValue(authContextState);
+  console.log({ authContext });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <RecoilRoot>
+      <div className="app">
+        <div className="appBanner">Learn Recoil - Time Sheet Project</div>
+        <div className="appContent">
+          <Routes>
+            <Route exact path="/login" element={<LoginView />} />
+          </Routes>
+        </div>
+      </div>
+    </RecoilRoot>
   );
 }
-
-export default App;
